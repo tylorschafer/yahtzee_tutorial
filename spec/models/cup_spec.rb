@@ -15,13 +15,13 @@ RSpec.describe 'Cup' do
     end
 
     it 'Has the correct starting attributes' do
-      expect(@cup.contents).to eq([])
+      expect(@cup.contents).to eq(nil)
     end
   end
 
   describe 'Instance Methods' do
     it 'load() can load a variable number of Die objects into contents' do
-      expect(@cpu.contents).to eq([])
+      expect(@cup.contents).to eq(nil)
       @cup.load(@dice)
       expect(@cup.contents).to eq(@dice)
     end
@@ -38,7 +38,7 @@ RSpec.describe 'Cup' do
       expect(rolled_dice[3].curr_value).to_not be(nil)
       expect(rolled_dice[4].curr_value).to_not be(nil)
       expect(rolled_dice[5].curr_value).to_not be(nil)
-      expect(@cup.contents).to eq([])
+      expect(@cup.contents).to eq(nil)
     end
   end
 end

@@ -6,8 +6,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Tylor Schafer"]
   spec.email         = ["tylorschafer@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
+  spec.summary       = %q{A basic tutorial for creating Yatzee using TDD}
+  spec.description   = %q{A basic tutorial for creating Yatzee using TDD}
   spec.homepage      = "TODO: Put your gem's website or public repo URL here."
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")

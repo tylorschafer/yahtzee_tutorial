@@ -21,7 +21,7 @@ RSpec.describe 'Die' do
     it 'roll() assigns a new random curr_value' do
       expect(@die.curr_value).to eq(nil)
       @die.roll()
-      expect(@die.curr_value).to not_eq(nil)
+      expect(@die.curr_value).to_not eq(nil)
     end
   end
 end

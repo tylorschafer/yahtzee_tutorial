@@ -1,6 +1,6 @@
-require 'spec_helper'
+require './spec/spec_helper'
 
-describe Die, type: :model do
+RSpec.describe 'Die' do
 
   before :each do
     @die = Die.new()

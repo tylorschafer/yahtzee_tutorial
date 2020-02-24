@@ -1,5 +1,6 @@
-require "bundler/setup"
-require "yahtzee"
+require 'bundler/setup'
+require './lib/die'
+require 'rspec'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

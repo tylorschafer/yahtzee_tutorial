@@ -2,10 +2,17 @@ class Cup
   attr_reader :contents
 
   def initialize()
-    @contents = nil
+    @contents = []
   end
 
   def load(dice)
-    @contents.push(dice)
+    dice.each { |die| @contents << die }
+  end
+
+  def pour()
+    rolled_dice = @contents
+    rolled_dice.each { |die| die.roll() }
+    @contents = []
+    rolled_dice
   end
 end

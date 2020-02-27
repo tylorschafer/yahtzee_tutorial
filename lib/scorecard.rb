@@ -50,4 +50,14 @@ class Scorecard
       false
     end
   end
+
+  def full_house(dice)
+    valid = group_finder(dice).values.all? { |value| value == 2 }
+    if valid
+      @total_score += 25
+      @lower_section[:full_house] = 25
+    else
+      false
+    end
+  end
 end

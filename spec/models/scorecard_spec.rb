@@ -147,7 +147,7 @@ RSpec.describe 'Scorecard' do
       expect(@scorecard.lower_section[:four_of_kind]).to eq(4)
     end
 
-    xit 'full_house() returns true and adds 25 points to total_score if there is a full house' do
+    it 'full_house() returns true and adds 25 points to total_score if there is a full house' do
       @dice[0].curr_value = 1
       @dice[1].curr_value = 1
       @dice[2].curr_value = 1

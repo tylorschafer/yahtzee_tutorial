@@ -40,12 +40,12 @@ class Scorecard
     tally
   end
 
-  def three_of_kind(dice)
+  def of_kind(dice, number, name)
     num = group_finder(dice).max_by { |k,v| v }
-    score = num[1] >= 3 ? num[0] * num[1] : false
+    score = num[1] >= number ? num[0] * num[1] : false
     if score
       @total_score += score
-      @lower_section[:three_of_kind] = score
+      @lower_section[name] = score
     else
       false
     end

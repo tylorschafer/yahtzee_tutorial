@@ -99,7 +99,7 @@ RSpec.describe 'Scorecard' do
       expect(@scorecard.upper_section[:threes]).to eq(9)
     end
 
-    it 'three_of_kind() verifies there are 3 die of the same number and adds sum of die values to total score' do
+    it 'of_kind() can verify there are 3 die of the same number and adds sum of die values to total score' do
       @dice[0].curr_value = 1
       @dice[1].curr_value = 2
       @dice[2].curr_value = 3
@@ -107,7 +107,7 @@ RSpec.describe 'Scorecard' do
       @dice[4].curr_value = 5
       @dice[5].curr_value = 1
 
-      expect(@scorecard.three_of_kind(@dice)).to eq(false)
+      expect(@scorecard.of_kind(@dice, 3, :three_of_kind)).to eq(false)
       expect(@scorecard.total_score).to eq(0)
       expect(@scorecard.lower_section[:three_of_kind]).to eq(0)
 
@@ -118,12 +118,12 @@ RSpec.describe 'Scorecard' do
       @dice[4].curr_value = 5
       @dice[5].curr_value = 6
 
-      expect(@scorecard.three_of_kind(@dice)).to eq(3)
+      expect(@scorecard.of_kind(@dice, 3, :three_of_kind)).to eq(3)
       expect(@scorecard.total_score).to eq(3)
       expect(@scorecard.lower_section[:three_of_kind]).to eq(3)
     end
 
-    xit 'four_of_kind() verifies there are 3 die of the same number and adds sum of die values to total score' do
+    it 'of_kind() can verify there are 4 die of the same number and adds sum of die values to total score' do
       @dice[0].curr_value = 1
       @dice[1].curr_value = 2
       @dice[2].curr_value = 3
@@ -131,7 +131,7 @@ RSpec.describe 'Scorecard' do
       @dice[4].curr_value = 5
       @dice[5].curr_value = 1
 
-      expect(@scorecard.four_of_kind(@dice)).to eq(false)
+      expect(@scorecard.of_kind(@dice, 4, :four_of_kind)).to eq(false)
       expect(@scorecard.total_score).to eq(0)
       expect(@scorecard.lower_section[:four_of_kind]).to eq(0)
 
@@ -142,7 +142,7 @@ RSpec.describe 'Scorecard' do
       @dice[4].curr_value = 5
       @dice[5].curr_value = 6
 
-      expect(@scorecard.four_of_kind(@dice)).to eq(4)
+      expect(@scorecard.of_kind(@dice, 4, :four_of_kind)).to eq(4)
       expect(@scorecard.total_score).to eq(4)
       expect(@scorecard.lower_section[:four_of_kind]).to eq(4)
     end

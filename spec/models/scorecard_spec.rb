@@ -54,7 +54,12 @@ RSpec.describe 'Scorecard' do
         @dice[5].curr_value = 5
       end
       it 'group_finder() finds the count of each die number in play' do
-        expect(@scorecard.group_finder(@dice)).to eq({                                            })
+        expect(@scorecard.group_finder(@dice)).to eq({
+                                                      1 => 3,
+                                                      2 => 1,
+                                                      3 => 1,
+                                                      5 => 1
+                                                    })
       end
       xit 'seq_finder() returns the longest sequence length of the die in play' do
          expect(@scorecard.seq_finder(@dice)).to eq(3)

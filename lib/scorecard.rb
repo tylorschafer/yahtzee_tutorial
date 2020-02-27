@@ -25,4 +25,13 @@ class Scorecard
   def group_finder(dice)
     dice.group_by(&:curr_value).map {|k,v| [k, v.size] }.to_h
   end
+
+  def seq_finder(dice)
+    curr_values = dice.map { |die| die.curr_value }.sort
+    count = 1
+    curr_values.each_cons(2) {|nums| count += 1 if nums[1] - nums[0] == 1 }
+    count
+  end
+
+
 end

@@ -70,4 +70,11 @@ class Scorecard
       false
     end
   end
+
+  def chance(dice)
+    score = dice.sum(&:curr_value)
+    @total_score += score
+    @lower_section[:chance] = score
+    score
+  end
 end

@@ -195,7 +195,7 @@ RSpec.describe 'Scorecard' do
       expect(@scorecard.lower_section[:sm_straight]).to eq(30)
     end
 
-    xit 'straight() returns true and adds 30 points if there is 4 consecutive die values' do
+    it 'straight() returns true and adds 30 points if there is 4 consecutive die values' do
       @dice[0].curr_value = 1
       @dice[1].curr_value = 1
       @dice[2].curr_value = 2
@@ -219,7 +219,7 @@ RSpec.describe 'Scorecard' do
       expect(@scorecard.lower_section[:lg_straight]).to eq(40)
     end
 
-    xit 'chance() adds and returns the sum of all dice' do
+    it 'chance() adds and returns the sum of all dice' do
       @dice[0].curr_value = 1
       @dice[1].curr_value = 2
       @dice[2].curr_value = 3

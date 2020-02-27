@@ -75,7 +75,7 @@ RSpec.describe 'Scorecard' do
       end
     end
 
-    xit 'tally_die() tallies and sums the count of a specified die' do
+    it 'tally_die() tallies and sums the count of a specified die' do
       @dice[0].curr_value = 1
       @dice[1].curr_value = 2
       @dice[2].curr_value = 3
@@ -83,7 +83,7 @@ RSpec.describe 'Scorecard' do
       @dice[4].curr_value = 5
       @dice[5].curr_value = 1
 
-      expect(@scorecard.tally_die(@dice, 1, 'aces')).to eq(2)
+      expect(@scorecard.tally_die(@dice, 1, :aces)).to eq(2)
       expect(@scorecard.total_score).to eq(2)
       expect(@scorecard.upper_section[:aces]).to eq(2)
 
@@ -94,9 +94,9 @@ RSpec.describe 'Scorecard' do
       @dice[4].curr_value = 3
       @dice[5].curr_value = 1
 
-      expect(@scorecard.tally_die(@dice, 3, 'threes')).to eq(9)
-      expect(@scorecard.total_score).to eq(9)
-      expect(@scorecard.upper_section[:threes]).to eq(11)
+      expect(@scorecard.tally_die(@dice, 3, :threes)).to eq(9)
+      expect(@scorecard.total_score).to eq(11)
+      expect(@scorecard.upper_section[:threes]).to eq(9)
     end
 
     xit 'three_of_kind() verifies there are 3 die of the same number and adds sum of die values to total score' do

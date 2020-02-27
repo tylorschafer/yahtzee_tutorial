@@ -33,5 +33,10 @@ class Scorecard
     count
   end
 
-
+  def tally_die(dice, curr_value, name)
+    tally = dice.select { |die| die.curr_value == curr_value }.sum(&:curr_value)
+    @upper_section[name] = tally
+    @total_score += tally
+    tally
+  end
 end

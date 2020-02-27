@@ -1,5 +1,6 @@
 class Die
-  attr_reader :curr_value, :values
+  attr_reader :values
+  attr_accessor :curr_value
 
   def initialize()
     @values = [1,2,3,4,5,6]

@@ -43,7 +43,7 @@ RSpec.describe 'Scorecard' do
     end
   end
 
-  describe 'Instance m\Methods' do
+  describe 'Instance Methods' do
     describe 'Helper Methods' do
       before :each do
         @dice[0].curr_value = 1
@@ -53,7 +53,7 @@ RSpec.describe 'Scorecard' do
         @dice[4].curr_value = 3
         @dice[5].curr_value = 5
       end
-      xit 'group_finder() finds the count of each die number in play' do
+      it 'group_finder() finds the count of each die number in play' do
         expect(@scorecard.group_finder(@dice)).to eq({
                                                       1 => 3,
                                                       2 => 1,
@@ -61,7 +61,7 @@ RSpec.describe 'Scorecard' do
                                                       5 => 1
                                                     })
       end
-      xit 'seq_finder() returns the longest sequence length of the die in play' do
+      it 'seq_finder() returns the longest sequence length of the die in play' do
          expect(@scorecard.seq_finder(@dice)).to eq(3)
 
          @dice[0].curr_value = 1
@@ -75,7 +75,7 @@ RSpec.describe 'Scorecard' do
       end
     end
 
-    xit 'tally_die() tallies and sums the count of a specified die' do
+    it 'tally_die() tallies and sums the count of a specified die' do
       @dice[0].curr_value = 1
       @dice[1].curr_value = 2
       @dice[2].curr_value = 3
@@ -83,7 +83,7 @@ RSpec.describe 'Scorecard' do
       @dice[4].curr_value = 5
       @dice[5].curr_value = 1
 
-      expect(@scorecard.tally_die(@dice, 1, 'aces')).to eq(2)
+      expect(@scorecard.tally_die(@dice, 1, :aces)).to eq(2)
       expect(@scorecard.total_score).to eq(2)
       expect(@scorecard.upper_section[:aces]).to eq(2)
 
@@ -94,12 +94,12 @@ RSpec.describe 'Scorecard' do
       @dice[4].curr_value = 3
       @dice[5].curr_value = 1
 
-      expect(@scorecard.tally_die(@dice, 3, 'threes')).to eq(9)
-      expect(@scorecard.total_score).to eq(9)
-      expect(@scorecard.upper_section[:threes]).to eq(11)
+      expect(@scorecard.tally_die(@dice, 3, :threes)).to eq(9)
+      expect(@scorecard.total_score).to eq(11)
+      expect(@scorecard.upper_section[:threes]).to eq(9)
     end
 
-    xit 'three_of_kind() verifies there are 3 die of the same number and adds sum of die values to total score' do
+    it 'of_kind() can verify there are 3 die of the same number and adds sum of die values to total score' do
       @dice[0].curr_value = 1
       @dice[1].curr_value = 2
       @dice[2].curr_value = 3
@@ -107,7 +107,7 @@ RSpec.describe 'Scorecard' do
       @dice[4].curr_value = 5
       @dice[5].curr_value = 1
 
-      expect(@scorecard.three_of_kind(@dice)).to eq(false)
+      expect(@scorecard.of_kind(@dice, 3, :three_of_kind)).to eq(false)
       expect(@scorecard.total_score).to eq(0)
       expect(@scorecard.lower_section[:three_of_kind]).to eq(0)
 
@@ -118,12 +118,12 @@ RSpec.describe 'Scorecard' do
       @dice[4].curr_value = 5
       @dice[5].curr_value = 6
 
-      expect(@scorecard.three_of_kind(@dice)).to eq(18)
-      expect(@scorecard.total_score).to eq(18)
-      expect(@scorecard.lower_section[:three_of_kind]).to eq(18)
+      expect(@scorecard.of_kind(@dice, 3, :three_of_kind)).to eq(3)
+      expect(@scorecard.total_score).to eq(3)
+      expect(@scorecard.lower_section[:three_of_kind]).to eq(3)
     end
 
-    xit 'four_of_kind() verifies there are 3 die of the same number and adds sum of die values to total score' do
+    it 'of_kind() can verify there are 4 die of the same number and adds sum of die values to total score' do
       @dice[0].curr_value = 1
       @dice[1].curr_value = 2
       @dice[2].curr_value = 3
@@ -131,7 +131,7 @@ RSpec.describe 'Scorecard' do
       @dice[4].curr_value = 5
       @dice[5].curr_value = 1
 
-      expect(@scorecard.four_of_kind(@dice)).to eq(false)
+      expect(@scorecard.of_kind(@dice, 4, :four_of_kind)).to eq(false)
       expect(@scorecard.total_score).to eq(0)
       expect(@scorecard.lower_section[:four_of_kind]).to eq(0)
 
@@ -142,12 +142,12 @@ RSpec.describe 'Scorecard' do
       @dice[4].curr_value = 5
       @dice[5].curr_value = 6
 
-      expect(@scorecard.four_of_kind(@dice)).to eq(15)
-      expect(@scorecard.total_score).to eq(15)
-      expect(@scorecard.lower_section[:four_of_kind]).to eq(15)
+      expect(@scorecard.of_kind(@dice, 4, :four_of_kind)).to eq(4)
+      expect(@scorecard.total_score).to eq(4)
+      expect(@scorecard.lower_section[:four_of_kind]).to eq(4)
     end
 
-    xit 'full_house() returns true and adds 25 points to total_score if there is a full house' do
+    it 'full_house() returns true and adds 25 points to total_score if there is a full house' do
       @dice[0].curr_value = 1
       @dice[1].curr_value = 1
       @dice[2].curr_value = 1
@@ -171,7 +171,7 @@ RSpec.describe 'Scorecard' do
       expect(@scorecard.lower_section[:full_house]).to eq(25)
     end
 
-    xit 'sm_straight() returns true and adds 30 points if there is 4 consecutive die values' do
+    it 'straight() returns true and adds 30 points if there is 4 consecutive die values' do
       @dice[0].curr_value = 1
       @dice[1].curr_value = 1
       @dice[2].curr_value = 2
@@ -179,7 +179,7 @@ RSpec.describe 'Scorecard' do
       @dice[4].curr_value = 3
       @dice[5].curr_value = 3
 
-      expect(@scorecard.sm_straight(@dice)).to eq(false)
+      expect(@scorecard.straight(@dice, 4, :sm_straight)).to eq(false)
       expect(@scorecard.total_score).to eq(0)
       expect(@scorecard.lower_section[:sm_straight]).to eq(0)
 
@@ -190,12 +190,12 @@ RSpec.describe 'Scorecard' do
       @dice[4].curr_value = 3
       @dice[5].curr_value = 3
 
-      expect(@scorecard.sm_straight(@dice)).to eq(30)
+      expect(@scorecard.straight(@dice, 4, :sm_straight)).to eq(30)
       expect(@scorecard.total_score).to eq(30)
       expect(@scorecard.lower_section[:sm_straight]).to eq(30)
     end
 
-    xit 'lg_straight() returns true and adds 30 points if there is 4 consecutive die values' do
+    it 'straight() returns true and adds 30 points if there is 4 consecutive die values' do
       @dice[0].curr_value = 1
       @dice[1].curr_value = 1
       @dice[2].curr_value = 2
@@ -203,7 +203,7 @@ RSpec.describe 'Scorecard' do
       @dice[4].curr_value = 3
       @dice[5].curr_value = 3
 
-      expect(@scorecard.lg_straight(@dice)).to eq(false)
+      expect(@scorecard.straight(@dice, 5, :lg_straight)).to eq(false)
       expect(@scorecard.total_score).to eq(0)
       expect(@scorecard.lower_section[:lg_straight]).to eq(0)
 
@@ -214,12 +214,12 @@ RSpec.describe 'Scorecard' do
       @dice[4].curr_value = 5
       @dice[5].curr_value = 3
 
-      expect(@scorecard.lg_straight(@dice)).to eq(40)
+      expect(@scorecard.straight(@dice, 5, :lg_straight)).to eq(40)
       expect(@scorecard.total_score).to eq(40)
       expect(@scorecard.lower_section[:lg_straight]).to eq(40)
     end
 
-    xit 'chance() adds and returns the sum of all dice' do
+    it 'chance() adds and returns the sum of all dice' do
       @dice[0].curr_value = 1
       @dice[1].curr_value = 2
       @dice[2].curr_value = 3
@@ -232,7 +232,7 @@ RSpec.describe 'Scorecard' do
       expect(@scorecard.lower_section[:chance]).to eq(18)
     end
 
-    xit 'yahtzee returns true and adds 50 points if there is a yahtzee, on the second yahtzee 100 points are added' do
+    it 'yahtzee returns true and adds 50 points if there is a yahtzee, on the second yahtzee 100 points are added' do
       @dice[0].curr_value = 1
       @dice[1].curr_value = 2
       @dice[2].curr_value = 3
@@ -262,7 +262,7 @@ RSpec.describe 'Scorecard' do
       @dice[4].curr_value = 1
       @dice[5].curr_value = 1
 
-      expect(@scorecard.yahtzee(@dice)).to eq(100)
+      expect(@scorecard.yahtzee(@dice)).to eq(150)
       expect(@scorecard.total_score).to eq(150)
       expect(@scorecard.lower_section[:yahtzee]).to eq(150)
     end

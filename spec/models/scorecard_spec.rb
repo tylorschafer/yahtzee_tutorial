@@ -171,7 +171,7 @@ RSpec.describe 'Scorecard' do
       expect(@scorecard.lower_section[:full_house]).to eq(25)
     end
 
-    xit 'sm_straight() returns true and adds 30 points if there is 4 consecutive die values' do
+    it 'straight() returns true and adds 30 points if there is 4 consecutive die values' do
       @dice[0].curr_value = 1
       @dice[1].curr_value = 1
       @dice[2].curr_value = 2
@@ -179,7 +179,7 @@ RSpec.describe 'Scorecard' do
       @dice[4].curr_value = 3
       @dice[5].curr_value = 3
 
-      expect(@scorecard.sm_straight(@dice)).to eq(false)
+      expect(@scorecard.straight(@dice, 4, :sm_straight)).to eq(false)
       expect(@scorecard.total_score).to eq(0)
       expect(@scorecard.lower_section[:sm_straight]).to eq(0)
 
@@ -190,12 +190,12 @@ RSpec.describe 'Scorecard' do
       @dice[4].curr_value = 3
       @dice[5].curr_value = 3
 
-      expect(@scorecard.sm_straight(@dice)).to eq(30)
+      expect(@scorecard.straight(@dice, 4, :sm_straight)).to eq(30)
       expect(@scorecard.total_score).to eq(30)
       expect(@scorecard.lower_section[:sm_straight]).to eq(30)
     end
 
-    xit 'lg_straight() returns true and adds 30 points if there is 4 consecutive die values' do
+    xit 'straight() returns true and adds 30 points if there is 4 consecutive die values' do
       @dice[0].curr_value = 1
       @dice[1].curr_value = 1
       @dice[2].curr_value = 2
@@ -203,7 +203,7 @@ RSpec.describe 'Scorecard' do
       @dice[4].curr_value = 3
       @dice[5].curr_value = 3
 
-      expect(@scorecard.lg_straight(@dice)).to eq(false)
+      expect(@scorecard.straight(@dice, 5, :lg_straight)).to eq(false)
       expect(@scorecard.total_score).to eq(0)
       expect(@scorecard.lower_section[:lg_straight]).to eq(0)
 
@@ -214,7 +214,7 @@ RSpec.describe 'Scorecard' do
       @dice[4].curr_value = 5
       @dice[5].curr_value = 3
 
-      expect(@scorecard.lg_straight(@dice)).to eq(40)
+      expect(@scorecard.straight(@dice, 5, :lg_straight)).to eq(40)
       expect(@scorecard.total_score).to eq(40)
       expect(@scorecard.lower_section[:lg_straight]).to eq(40)
     end

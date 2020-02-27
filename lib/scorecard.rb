@@ -60,4 +60,14 @@ class Scorecard
       false
     end
   end
+
+  def straight(dice, num, name)
+    valid = seq_finder(dice) >= num
+    if valid
+      num == 4 ? @lower_section[name] = 30 : @lower_section[name] = 40
+      num == 4 ? @total_score += 30 : @total_score += 40
+    else
+      false
+    end
+  end
 end

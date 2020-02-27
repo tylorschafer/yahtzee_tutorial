@@ -77,4 +77,15 @@ class Scorecard
     @lower_section[:chance] = score
     score
   end
+
+  def yahtzee(dice)
+    valid = group_finder(dice).values.first == 6
+    score = @lower_section[:yahtzee] > 0 ? 100 : 50
+    if valid
+      @lower_section[:yahtzee] += score
+      @total_score += score
+    else
+      false
+    end
+  end
 end

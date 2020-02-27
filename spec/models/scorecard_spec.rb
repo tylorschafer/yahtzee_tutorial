@@ -61,7 +61,7 @@ RSpec.describe 'Scorecard' do
                                                       5 => 1
                                                     })
       end
-      xit 'seq_finder() returns the longest sequence length of the die in play' do
+      it 'seq_finder() returns the longest sequence length of the die in play' do
          expect(@scorecard.seq_finder(@dice)).to eq(3)
 
          @dice[0].curr_value = 1
@@ -232,7 +232,7 @@ RSpec.describe 'Scorecard' do
       expect(@scorecard.lower_section[:chance]).to eq(18)
     end
 
-    xit 'yahtzee returns true and adds 50 points if there is a yahtzee, on the second yahtzee 100 points are added' do
+    it 'yahtzee returns true and adds 50 points if there is a yahtzee, on the second yahtzee 100 points are added' do
       @dice[0].curr_value = 1
       @dice[1].curr_value = 2
       @dice[2].curr_value = 3
@@ -262,7 +262,7 @@ RSpec.describe 'Scorecard' do
       @dice[4].curr_value = 1
       @dice[5].curr_value = 1
 
-      expect(@scorecard.yahtzee(@dice)).to eq(100)
+      expect(@scorecard.yahtzee(@dice)).to eq(150)
       expect(@scorecard.total_score).to eq(150)
       expect(@scorecard.lower_section[:yahtzee]).to eq(150)
     end

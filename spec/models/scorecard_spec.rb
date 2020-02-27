@@ -43,7 +43,7 @@ RSpec.describe 'Scorecard' do
     end
   end
 
-  describe 'Instance m\Methods' do
+  describe 'Instance Methods' do
     describe 'Helper Methods' do
       before :each do
         @dice[0].curr_value = 1

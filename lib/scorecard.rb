@@ -40,9 +40,9 @@ class Scorecard
     tally
   end
 
-  def of_kind(dice, number, name)
+  def of_kind(dice, curr_value, name)
     num = group_finder(dice).max_by { |k,v| v }
-    score = num[1] >= number ? num[0] * num[1] : false
+    score = num[1] >= curr_value ? num[0] * num[1] : false
     if score
       @total_score += score
       @lower_section[name] = score
@@ -61,11 +61,11 @@ class Scorecard
     end
   end
 
-  def straight(dice, num, name)
-    valid = seq_finder(dice) >= num
+  def straight(dice, curr_value, name)
+    valid = seq_finder(dice) >= curr_value
     if valid
-      num == 4 ? @lower_section[name] = 30 : @lower_section[name] = 40
-      num == 4 ? @total_score += 30 : @total_score += 40
+      curr_value == 4 ? @lower_section[name] = 30 : @lower_section[name] = 40
+      curr_value == 4 ? @total_score += 30 : @total_score += 40
     else
       false
     end

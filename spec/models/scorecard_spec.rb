@@ -118,5 +118,71 @@ RSpec.describe 'Scorecard' do
       expect(@scorecard.four_of_kind(@dice)).to eq(true)
       expect(@scorecard.total_score).to eq(15)
     end
+
+    it 'full_house() returns true and adds 25 points to total_score if there is a full house' do
+      @dice[0].curr_value = 1
+      @dice[1].curr_value = 1
+      @dice[2].curr_value = 1
+      @dice[3].curr_value = 1
+      @dice[4].curr_value = 5
+      @dice[5].curr_value = 6
+
+      expect(@scorecard.full_house(@dice)).to eq(false)
+      expect(@scorecard.total_score).to eq(0)
+
+      @dice[0].curr_value = 1
+      @dice[1].curr_value = 1
+      @dice[2].curr_value = 2
+      @dice[3].curr_value = 2
+      @dice[4].curr_value = 3
+      @dice[5].curr_value = 3
+
+      expect(@scorecard.full_house(@dice)).to eq(true)
+      expect(@scorecard.total_score).to eq(25)
+    end
+
+    it 'sm_straight() returns true and adds 30 points if there is 4 consecutive die values' do
+      @dice[0].curr_value = 1
+      @dice[1].curr_value = 1
+      @dice[2].curr_value = 2
+      @dice[3].curr_value = 2
+      @dice[4].curr_value = 3
+      @dice[5].curr_value = 3
+
+      expect(@scorecard.sm_straight(@dice)).to eq(false)
+      expect(@scorecard.total_score).to eq(0)
+
+      @dice[0].curr_value = 1
+      @dice[1].curr_value = 2
+      @dice[2].curr_value = 3
+      @dice[3].curr_value = 4
+      @dice[4].curr_value = 3
+      @dice[5].curr_value = 3
+
+      expect(@scorecard.sm_straight(@dice)).to eq(true)
+      expect(@scorecard.total_score).to eq(30)
+    end
+
+    it 'lg_straight() returns true and adds 30 points if there is 4 consecutive die values' do
+      @dice[0].curr_value = 1
+      @dice[1].curr_value = 1
+      @dice[2].curr_value = 2
+      @dice[3].curr_value = 2
+      @dice[4].curr_value = 3
+      @dice[5].curr_value = 3
+
+      expect(@scorecard.lg_straight(@dice)).to eq(false)
+      expect(@scorecard.total_score).to eq(0)
+
+      @dice[0].curr_value = 1
+      @dice[1].curr_value = 2
+      @dice[2].curr_value = 3
+      @dice[3].curr_value = 4
+      @dice[4].curr_value = 5
+      @dice[5].curr_value = 3
+
+      expect(@scorecard.lg_straight(@dice)).to eq(true)
+      expect(@scorecard.total_score).to eq(40)
+    end
   end
 end

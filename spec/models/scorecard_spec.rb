@@ -93,7 +93,7 @@ RSpec.describe 'Scorecard' do
       @dice[4].curr_value = 5
       @dice[5].curr_value = 6
 
-      expect(@scorecard.three_of_kind(@dice)).to eq(true)
+      expect(@scorecard.three_of_kind(@dice)).to eq(18)
       expect(@scorecard.total_score).to eq(18)
     end
 
@@ -115,7 +115,7 @@ RSpec.describe 'Scorecard' do
       @dice[4].curr_value = 5
       @dice[5].curr_value = 6
 
-      expect(@scorecard.four_of_kind(@dice)).to eq(true)
+      expect(@scorecard.four_of_kind(@dice)).to eq(15)
       expect(@scorecard.total_score).to eq(15)
     end
 
@@ -137,7 +137,7 @@ RSpec.describe 'Scorecard' do
       @dice[4].curr_value = 3
       @dice[5].curr_value = 3
 
-      expect(@scorecard.full_house(@dice)).to eq(true)
+      expect(@scorecard.full_house(@dice)).to eq(25)
       expect(@scorecard.total_score).to eq(25)
     end
 
@@ -159,7 +159,7 @@ RSpec.describe 'Scorecard' do
       @dice[4].curr_value = 3
       @dice[5].curr_value = 3
 
-      expect(@scorecard.sm_straight(@dice)).to eq(true)
+      expect(@scorecard.sm_straight(@dice)).to eq(30)
       expect(@scorecard.total_score).to eq(30)
     end
 
@@ -181,8 +181,52 @@ RSpec.describe 'Scorecard' do
       @dice[4].curr_value = 5
       @dice[5].curr_value = 3
 
-      expect(@scorecard.lg_straight(@dice)).to eq(true)
+      expect(@scorecard.lg_straight(@dice)).to eq(40)
       expect(@scorecard.total_score).to eq(40)
+    end
+
+    it 'chance() adds and returns the sum of all dice' do
+      @dice[0].curr_value = 1
+      @dice[1].curr_value = 2
+      @dice[2].curr_value = 3
+      @dice[3].curr_value = 4
+      @dice[4].curr_value = 5
+      @dice[5].curr_value = 3
+
+      expect(@scorecard.chance(@dice)).to eq(18)
+      expect(@scorecard.total_score).to eq(18)
+    end
+
+    it 'yahtzee returns true and adds 50 points if there is a yahtzee, on the second yahtzee 100 points are added' do
+      @dice[0].curr_value = 1
+      @dice[1].curr_value = 2
+      @dice[2].curr_value = 3
+      @dice[3].curr_value = 4
+      @dice[4].curr_value = 5
+      @dice[5].curr_value = 3
+
+      expect(@scorecard.yahtzee(@dice)).to eq(false)
+      expect(@scorecard.total_score).to eq(0)
+
+      @dice[0].curr_value = 1
+      @dice[1].curr_value = 1
+      @dice[2].curr_value = 1
+      @dice[3].curr_value = 1
+      @dice[4].curr_value = 1
+      @dice[5].curr_value = 1
+
+      expect(@scorecard.yahtzee(@dice)).to eq(50)
+      expect(@scorecard.total_score).to eq(50)
+
+      @dice[0].curr_value = 1
+      @dice[1].curr_value = 1
+      @dice[2].curr_value = 1
+      @dice[3].curr_value = 1
+      @dice[4].curr_value = 1
+      @dice[5].curr_value = 1
+
+      expect(@scorecard.yahtzee(@dice)).to eq(100)
+      expect(@scorecard.total_score).to eq(150)
     end
   end
 end

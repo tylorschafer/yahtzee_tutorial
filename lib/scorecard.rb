@@ -21,4 +21,8 @@ class Scorecard
       chance: 0
     }
   end
+
+  def group_finder(dice)
+    dice.group_by(&:curr_value).map {|k,v| [k, v.size] }.to_h
+  end
 end

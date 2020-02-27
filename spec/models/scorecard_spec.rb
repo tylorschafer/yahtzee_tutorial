@@ -74,5 +74,49 @@ RSpec.describe 'Scorecard' do
          expect(@scorecard.seq_finder(@dice)).to eq(5)
       end
     end
+
+    it 'three_of_kind() verifies there are 3 die of the same number and adds sum of die values to total score' do
+      @dice[0].curr_value = 1
+      @dice[1].curr_value = 2
+      @dice[2].curr_value = 3
+      @dice[3].curr_value = 4
+      @dice[4].curr_value = 5
+      @dice[5].curr_value = 1
+
+      expect(@scorecard.three_of_kind(@dice)).to eq(false)
+      expect(@scorecard.total_score).to eq(0)
+
+      @dice[0].curr_value = 1
+      @dice[1].curr_value = 1
+      @dice[2].curr_value = 1
+      @dice[3].curr_value = 4
+      @dice[4].curr_value = 5
+      @dice[5].curr_value = 6
+
+      expect(@scorecard.three_of_kind(@dice)).to eq(true)
+      expect(@scorecard.total_score).to eq(18)
+    end
+
+    it 'four_of_kind() verifies there are 3 die of the same number and adds sum of die values to total score' do
+      @dice[0].curr_value = 1
+      @dice[1].curr_value = 2
+      @dice[2].curr_value = 3
+      @dice[3].curr_value = 4
+      @dice[4].curr_value = 5
+      @dice[5].curr_value = 1
+
+      expect(@scorecard.four_of_kind(@dice)).to eq(false)
+      expect(@scorecard.total_score).to eq(0)
+
+      @dice[0].curr_value = 1
+      @dice[1].curr_value = 1
+      @dice[2].curr_value = 1
+      @dice[3].curr_value = 1
+      @dice[4].curr_value = 5
+      @dice[5].curr_value = 6
+
+      expect(@scorecard.four_of_kind(@dice)).to eq(true)
+      expect(@scorecard.total_score).to eq(15)
+    end
   end
 end

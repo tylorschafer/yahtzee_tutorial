@@ -2,6 +2,7 @@ require 'bundler/setup'
 require './lib/die'
 require './lib/cup'
 require './lib/scorecard'
+require './lib/player'
 require 'rspec'
 require 'pry'
 

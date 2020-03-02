@@ -57,7 +57,8 @@ RSpec.describe 'Player' do
     end
 
     it 'score() prompts to score their @in_play dice' do
-
+      @player.roll()
+      @player.score()
     end
   end
 end

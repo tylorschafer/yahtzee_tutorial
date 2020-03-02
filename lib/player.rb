@@ -20,7 +20,6 @@ class Player
   def load()
     prompt = TTY::Prompt.new
     dice = @in_play.map { |die| "Die ##{die.number} | #{die.curr_value} |" }
-    dice << "I don't want to load any dice"
     selection = prompt.multi_select('What Dice would you like to Load?', dice)
     user_selection = selection.map { |die| die[5].to_i }
     user_selection.each do |selection|
@@ -28,5 +27,9 @@ class Player
       @cup.contents << die
       @in_play.delete(die)
     end
+  end
+
+  def roll()
+    
   end
 end

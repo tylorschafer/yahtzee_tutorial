@@ -30,6 +30,11 @@ class Player
   end
 
   def roll()
-    
+    prompt = TTY::Prompt.new
+    selection = prompt.select('Are you ready to roll your dice?', %w(yes no))
+    if selection == 'yes'
+      dice = @cup.pour().map { |die| "| #{die.curr_value} |" }
+      puts "You rolled " + dice.join(' ')
+    end
   end
 end

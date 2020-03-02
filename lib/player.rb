@@ -38,6 +38,9 @@ class Player
     end
   end
 
+  ## This needs a design overhual, more helper methods
+  ## Need a warning for asking the player to add 0 scores, or markoffs in Yahtzee terms
+
   def score()
     prompt = TTY::Prompt.new
     selections = [@scorecard.upper_section.keys]

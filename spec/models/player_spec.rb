@@ -40,16 +40,13 @@ RSpec.describe 'Player' do
 
   describe 'Instance Methods' do
     it 'load() prompts the player to load dice from @in_play and puts them into cup' do
-      @player.load()
-      
     end
 
     it 'roll() prompts the player to roll die in @cup.contents and returns the curr_value of each die' do
-
     end
 
     it 'score() prompts to score their @in_play dice' do
-
+      @player.take_turn()
     end
   end
 end

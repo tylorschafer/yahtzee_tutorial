@@ -17,6 +17,24 @@ class Player
     end
   end
 
+  def take_turn
+    rolls = 3
+    prompt = TTY::Prompt.new
+    while rolls > 0
+      roll()
+      rolls -= 1
+      player_dice = @in_play.map { |die| "| #{die.curr_value} |" }
+      puts "You Currently have " + player_dice.join(' ')
+      selection = prompt.select(
+        "Would you like to roll again? You have #{rolls} remaining", %w(yes no)
+      )
+      selection == 'yes' ? load() : break
+    end
+    player_dice = @in_play.map { |die| "| #{die.curr_value} |" }
+    puts "You Currently have " + player_dice.join(' ')
+    score()
+  end
+
   def load()
     prompt = TTY::Prompt.new
     dice = @in_play.map { |die| "Die ##{die.number} | #{die.curr_value} |" }
@@ -30,13 +48,10 @@ class Player
   end
 
   def roll()
-    prompt = TTY::Prompt.new
-    selection = prompt.select('Are you ready to roll your dice?', %w(yes no))
-    if selection == 'yes'
-      @in_play = @cup.pour
-      dice = @in_play.map { |die| "| #{die.curr_value} |" }
-      puts "You rolled " + dice.join(' ')
-    end
+    rolled_dice = @cup.pour()
+    @in_play += rolled_dice
+    dice = rolled_dice.map { |die| "| #{die.curr_value} |" }
+    puts "You rolled " + dice.join(' ')
   end
 
   def score()

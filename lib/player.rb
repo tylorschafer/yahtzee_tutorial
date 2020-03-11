@@ -33,7 +33,8 @@ class Player
     prompt = TTY::Prompt.new
     selection = prompt.select('Are you ready to roll your dice?', %w(yes no))
     if selection == 'yes'
-      dice = @cup.pour().map { |die| "| #{die.curr_value} |" }
+      @in_play = @cup.pour
+      dice = @in_play.map { |die| "| #{die.curr_value} |" }
       puts "You rolled " + dice.join(' ')
     end
   end
@@ -47,7 +48,7 @@ class Player
     else
       score = lower_score_loader(selection)
     end
-      "You scored #{score} on #{selection}"
+      p "You scored #{score} on #{selection.to_s}"
   end
 
   def upper_score_loader(name)
@@ -67,12 +68,29 @@ class Player
     end
   end
 
-  def lower_score_loader()
+  def lower_score_loader(name)
+    case name
+    when :three_of_kind
+      @scorecard.of_kind(@in_play, 3, :three_of_kind)
+    when :four_of_kind
+      @scorecard.of_kind(@in_play, 4, :four_of_kind)
+    when :full_house
+      @scorecard.full_house(@in_play)
+    when :sm_straight
+      @scorecard.straight(@in_play, 4, :sm_straight)
+    when :lg_straight
+      @scorecard.straight(@in_play, 5, :lg_straight)
+    when :yahtzee
+      @scorecard.yahtzee(@in_play)
+    when :chance
+      @scorecard.chance(@in_play)
+
+    end
   end
 
   def find_unscored_options()
-    upper = @scorecard.upper_section.find_all { |key, score| score == 0 }.map{|k,v| k}
-    lower = @scorecard.lower_section.find_all { |key, score| score == 0 }.map{|k,v| k}
+    upper = @scorecard.upper_section.find_all { |name, score| score == 0 }.map{|k,v| k}
+    lower = @scorecard.lower_section.find_all { |name, score| score == 0 }.map{|k,v| k}
     upper + lower
   end
 end

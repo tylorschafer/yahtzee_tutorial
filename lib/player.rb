@@ -17,7 +17,7 @@ class Player
     end
   end
 
-  def take_turn
+  def take_turn()
     rolls = 3
     prompt = TTY::Prompt.new
     while rolls > 0

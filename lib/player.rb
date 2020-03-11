@@ -38,14 +38,36 @@ class Player
     end
   end
 
-  ## This needs a design overhual, more helper methods
-  ## Need a warning for asking the player to add 0 scores, or markoffs in Yahtzee terms
-
   def score()
     prompt = TTY::Prompt.new
     selections = find_unscored_options()
-    binding.pry
     selection = prompt.select('How would you like to score your dice?', selections)
+    if [:aces, :twos, :threes, :fours, :fives, :sixes].include?(selection)
+      score = upper_score_loader(selection)
+    else
+      score = lower_score_loader(selection)
+    end
+      "You scored #{score} on #{selection}"
+  end
+
+  def upper_score_loader(name)
+    case name
+    when :aces
+      @scorecard.tally_die(@in_play, 1, :aces)
+    when :twos
+      @scorecard.tally_die(@in_play, 2, :twos)
+    when :threes
+      @scorecard.tally_die(@in_play, 3, :threes)
+    when :fours
+      @scorecard.tally_die(@in_play, 4, :fours)
+    when :fives
+      @scorecard.tally_die(@in_play, 5, :fives)
+    when :sixes
+      @scorecard.tally_die(@in_play, 6, :sixes)
+    end
+  end
+
+  def lower_score_loader()
   end
 
   def find_unscored_options()
